@@ -1,0 +1,72 @@
+/* src/components/AdminDashboard/UploadQuestion.css */
+body {
+  padding-left: 250px;
+}
+.upload-question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.upload-selection,
+.upload-question {
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.upload-selection h2,
+.upload-question h2 {
+  margin-bottom: 20px;
+}
+
+.upload-selection-form,
+.upload-question-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.admin-button,
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-button:hover,
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
