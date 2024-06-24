@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import UploadQuestion from "./components/AdminDashboard/UploadQuestion";
 import ViewQuestions from "./components/AdminDashboard/ViewQuestions";
 import "./App.css";
+import logo from "./assets/logo.png";
 
 const App = () => {
   return (
     <Router>
       <div className="App">
+        <img src={logo} alt="Project Logo" className="logo" />
         <h1>Welcome to Admin Dashboard</h1>
         <Routes>
           <Route
