@@ -34,6 +34,11 @@ const UploadQuestion = () => {
   const handleUploadSubmit = (e) => {
     e.preventDefault();
     // Handle the form submission logic here
+  // You can use axios
+// const postData ={grade,subject,topic,questionText,options,correctAnswer,image}
+
+  // await  axios.post("http://localhost:5000/upload_question",postData)
+  
     console.log({
       grade,
       subject,
