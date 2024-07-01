@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import UploadQuestion from "./components/AdminDashboard/UploadQuestion";
 import ViewQuestions from "./components/AdminDashboard/ViewQuestions";
+import Test from "./components/Test";
 import "./App.css";
 import logo from "./assets/logo.png";
 
@@ -28,6 +29,7 @@ const App = () => {
           />
           <Route path="/upload-question" element={<UploadQuestion />} />
           <Route path="/view-questions" element={<ViewQuestions />} />
+          <Route path="/test" element={<Test/>}/>
         </Routes>
       </div>
     </Router>

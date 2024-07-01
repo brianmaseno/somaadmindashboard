@@ -31,9 +31,10 @@ const ViewQuestions = () => {
     e.preventDefault();
     try {
       // Simulate fetching questions from an API endpoint
-      const response = await axios.get("http://localhost:5000/view_questions", {
+      const response = await axios.get("http://localhost:3000/view_questions", {
         params: { grade, subject, topic },
       });
+	console.log(response);
       setQuestions(response.data);
       setShowQuestions(true);
     } catch (error) {

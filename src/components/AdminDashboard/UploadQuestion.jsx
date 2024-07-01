@@ -1,18 +1,17 @@
-// src/components/AdminDashboard/UploadQuestion.jsx
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../css/UploadQuestion.css";
+import axios from "axios";
 
 const UploadQuestion = () => {
   const [step, setStep] = useState(1);
   const [grade, setGrade] = useState("");
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
-  const [questionText, setQuestionText] = useState("");
+  const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState("");
-  const [image, setImage] = useState(null);
+  const [correct_answer, setCorrectAnswer] = useState("");
+  const [image_url, setImageUrl] = useState(null);
 
   const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const UploadQuestion = () => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setImageUrl(e.target.files[0]);
   };
 
   const handleSelectionSubmit = (e) => {
@@ -31,34 +30,54 @@ const UploadQuestion = () => {
     setStep(2);
   };
 
-  const handleUploadSubmit = (e) => {
+const handleUploadSubmit = async (e) => {
     e.preventDefault();
-    // Handle the form submission logic here
-  // You can use axios
-// const postData ={grade,subject,topic,questionText,options,correctAnswer,image}
+    const formData = new FormData();
+    formData.append("grade", grade);
+    formData.append("subject", subject);
+    formData.append("topic", topic);
+    formData.append("question", question);
+    formData.append("options", JSON.stringify(options));
+    formData.append("correct_answer", correct_answer);
+    if (image_url) {
+        formData.append("file", image_url);
+    }
 
-  // await  axios.post("http://localhost:5000/upload_question",postData)
-  
     console.log({
-      grade,
-      subject,
-      topic,
-      questionText,
-      options,
-      correctAnswer,
-      image,
+        grade,
+        subject,
+        topic,
+        question,
+        options,
+        correct_answer,
+        image_url,
     });
-    alert("Question uploaded successfully");
+
+    try {
+        const response = await axios.post(
+            "http://localhost:3000/upload_question",
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        console.log(response);
+        navigate("/");
+    } catch (error) {
+        console.error(error);
+    }
+
     // Clear the form
     setGrade("");
     setSubject("");
     setTopic("");
-    setQuestionText("");
+    setQuestion("");
     setOptions(["", "", "", ""]);
     setCorrectAnswer("");
-    setImage(null);
-    navigate("/");
-  };
+    setImageUrl(null);
+};
 
   return (
     <div className="upload-question-container">
@@ -97,7 +116,7 @@ const UploadQuestion = () => {
                 required
               >
                 <option value="">Select Subject</option>
-                <option value="math">Math</option>
+                <option value="math">Mathematics</option>
                 <option value="science">Science</option>
                 <option value="english">English</option>
                 <option value="history">History</option>
@@ -130,19 +149,19 @@ const UploadQuestion = () => {
           </h2>
           <form onSubmit={handleUploadSubmit} className="upload-question-form">
             <div className="form-group">
-              <label htmlFor="questionText">Question Text:</label>
+              <label htmlFor="question">Question Text:</label>
               <textarea
-                id="questionText"
-                value={questionText}
-                onChange={(e) => setQuestionText(e.target.value)}
+                id="question"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
                 required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="image">Image (optional):</label>
+              <label htmlFor="image_url">Image (optional):</label>
               <input
                 type="file"
-                id="image"
+                id="image_url"
                 accept="image/*"
                 onChange={handleImageChange}
               />
@@ -161,11 +180,11 @@ const UploadQuestion = () => {
               ))}
             </div>
             <div className="form-group">
-              <label htmlFor="correctAnswer">Correct Answer:</label>
+              <label htmlFor="correct_answer">Correct Answer:</label>
               <input
                 type="text"
-                id="correctAnswer"
-                value={correctAnswer}
+                id="correct_answer"
+                value={correct_answer}
                 onChange={(e) => setCorrectAnswer(e.target.value)}
                 required
               />
