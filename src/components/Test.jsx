@@ -5,7 +5,7 @@ import axios from "axios";
 const Test = () => {
   return useEffect(() => {
     axios
-      .get("https://detector-trash-nail-diabetes.trycloudflare.com/test_cors")
+      .get("http://localhost:5000/test_cors")
       .then((response) => {
         console.log(response.data);
       })
