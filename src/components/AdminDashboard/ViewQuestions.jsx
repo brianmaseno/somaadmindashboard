@@ -12,9 +12,10 @@ const ViewQuestions = () => {
 
   // Mock data for subjects and topics based on grade
   const subjectsByGrade = {
-    "Grade 1": ["Mathematics", "Science"],
-    "Grade 2": ["Mathematics", "English"],
-    "Grade 3": ["Science", "History"],
+    1: ["Mathematics", "Science"],
+    2: ["Mathematics", "English"],
+    3: ["Science", "History"],
+    5: ["Mathematics", "Science"],
     // Define subjects for other grades as needed
   };
 
@@ -31,10 +32,13 @@ const ViewQuestions = () => {
     e.preventDefault();
     try {
       // Simulate fetching questions from an API endpoint
-      const response = await axios.get("http://localhost:3000/view_questions", {
+      const response = await axios.get("http://localhost:5000/view_questions", {
         params: { grade, subject, topic },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-	console.log(response);
+      console.log(response.data);
       setQuestions(response.data);
       setShowQuestions(true);
     } catch (error) {
@@ -58,12 +62,12 @@ const ViewQuestions = () => {
             <label>Select Grade:</label>
             <select
               value={grade}
-              onChange={(e) => setGrade(e.target.value)}
+              onChange={(e) => setGrade(parseInt(e.target.value))}
               required
             >
               <option value="">Select Grade</option>
               {Array.from({ length: 8 }, (_, index) => (
-                <option key={`grade-${index + 1}`} value={`Grade ${index + 1}`}>
+                <option key={`grade-${index + 1}`} value={index + 1}>
                   Grade {index + 1}
                 </option>
               ))}
@@ -128,3 +132,4 @@ const ViewQuestions = () => {
 };
 
 export default ViewQuestions;
+
