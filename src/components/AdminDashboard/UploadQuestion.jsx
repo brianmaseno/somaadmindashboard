@@ -55,7 +55,7 @@ const handleUploadSubmit = async (e) => {
 
     try {
         const response = await axios.post(
-            "http://localhost:3000/upload_question",
+            "http://localhost:5000/upload_question",
             formData,
             {
                 headers: {
@@ -116,12 +116,12 @@ const handleUploadSubmit = async (e) => {
                 required
               >
                 <option value="">Select Subject</option>
-                <option value="math">Mathematics</option>
-                <option value="science">Science</option>
-                <option value="english">English</option>
-                <option value="history">History</option>
-                <option value="geography">Geography</option>
-                <option value="computer">Computer Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Science">Science</option>
+                <option value="English">English</option>
+                <option value="History">History</option>
+                <option value="Geography">Geography</option>
+                <option value="Computer Science">Computer Science</option>
               </select>
             </div>
             <div className="form-group">
