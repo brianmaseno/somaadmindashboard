@@ -32,7 +32,7 @@ const ViewQuestions = () => {
     e.preventDefault();
     try {
       // Simulate fetching questions from an API endpoint
-      const response = await axios.get("http://localhost:5000/view_questions", {
+      const response = await axios.get("http://localhost:5000/upload_question", {
         params: { grade, subject, topic },
         headers: {
           "Content-Type": "multipart/form-data",
@@ -115,7 +115,7 @@ const ViewQuestions = () => {
               <li key={question.id} className="question-item">
                 <strong>Question:</strong> {question.question}
                 <br />
-                <strong>Answer:</strong> {question.answer}
+                <strong>Answer:</strong> {question.correct_answer}
                 <br />
                 <strong>Grade:</strong> {question.grade}
                 <br />
