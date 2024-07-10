@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-
 
 const Test = () => {
   return useEffect(() => {
