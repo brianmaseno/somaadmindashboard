@@ -10,7 +10,7 @@ const UploadQuestion = () => {
   const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correct_answer, setCorrectAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState(null); // Change this line
   const [image_url, setImageUrl] = useState(null);
 
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const UploadQuestion = () => {
     setStep(2);
   };
 
-const handleUploadSubmit = async (e) => {
+  const handleUploadSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("grade", grade);
@@ -38,35 +38,35 @@ const handleUploadSubmit = async (e) => {
     formData.append("topic", topic);
     formData.append("question", question);
     formData.append("options", JSON.stringify(options));
-    formData.append("correct_answer", correct_answer);
+    formData.append("correct_answer", correctAnswer); // Change this line
     if (image_url) {
-        formData.append("file", image_url);
+      formData.append("file", image_url);
     }
 
     console.log({
-        grade,
-        subject,
-        topic,
-        question,
-        options,
-        correct_answer,
-        image_url,
+      grade,
+      subject,
+      topic,
+      question,
+      options,
+      correctAnswer, // Change this line
+      image_url,
     });
 
     try {
-        const response = await axios.post(
-            "http://localhost:5000/upload_question",
-            formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            }
-        );
-        console.log(response);
-        navigate("/");
+      const response = await axios.post(
+        "http://localhost:5000/upload_question",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+      navigate("/");
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
 
     // Clear the form
@@ -75,9 +75,13 @@ const handleUploadSubmit = async (e) => {
     setTopic("");
     setQuestion("");
     setOptions(["", "", "", ""]);
-    setCorrectAnswer("");
+    setCorrectAnswer(null); // Change this line
     setImageUrl(null);
-};
+  };
+
+  const handleCheckboxChange = (index) => {
+    setCorrectAnswer(index); // Change this line
+  };
 
   return (
     <div className="upload-question-container">
@@ -166,28 +170,32 @@ const handleUploadSubmit = async (e) => {
                 onChange={handleImageChange}
               />
             </div>
+
             <div className="form-group">
               <label>Options:</label>
               {options.map((option, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  value={option}
-                  onChange={(e) => handleOptionChange(index, e.target.value)}
-                  placeholder={`Option ${index + 1}`}
-                  required
-                />
+                <div key={index} className="option-container">
+                  <div className="option-checkbox">
+                    <input
+                      type="checkbox"
+                      id={`option-${index}`}
+                      checked={correctAnswer === index} // Change this line
+                      onChange={() => handleCheckboxChange(index)} // Change this line
+                    />
+                  </div>
+                  <div className="answers">
+                    <input
+                      type="text"
+                      value={option}
+                      onChange={(e) =>
+                        handleOptionChange(index, e.target.value)
+                      }
+                      placeholder={`Option ${index + 1}`}
+                      required
+                    />
+                  </div>
+                </div>
               ))}
-            </div>
-            <div className="form-group">
-              <label htmlFor="correct_answer">Correct Answer:</label>
-              <input
-                type="text"
-                id="correct_answer"
-                value={correct_answer}
-                onChange={(e) => setCorrectAnswer(e.target.value)}
-                required
-              />
             </div>
             <button type="submit">Upload Question</button>
             <button

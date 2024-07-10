@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import "../../css/ViewQuestions.css"; // Adjust the path as necessary
-import dotenv from 'dotenv'
 
 const ViewQuestions = () => {
   // State variables
@@ -33,7 +32,7 @@ const ViewQuestions = () => {
     e.preventDefault();
     try {
       // Simulate fetching questions from an API endpoint
-      const response = await axios.get(`${process.env.BASE_URL}/upload_question`, {
+      const response = await axios.get("http://localhost:5000/upload_question", {
         params: { grade, subject, topic },
         headers: {
           "Content-Type": "multipart/form-data",
@@ -105,6 +104,9 @@ const ViewQuestions = () => {
             </select>
           </div>
           <button type="submit">View Questions</button>
+          <Link to="/" className="back-button">
+            Back
+          </Link>
         </form>
       ) : (
         <div className="question-list">
@@ -126,6 +128,9 @@ const ViewQuestions = () => {
               </li>
             ))}
           </ul>
+          <Link to="/" className="back-button">
+            Back to Admin Dashboard
+          </Link>
         </div>
       )}
     </div>
@@ -133,4 +138,3 @@ const ViewQuestions = () => {
 };
 
 export default ViewQuestions;
-
