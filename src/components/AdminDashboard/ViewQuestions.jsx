@@ -34,7 +34,7 @@ const ViewQuestions = () => {
     try {
       // Simulate fetching questions from an API endpoint
       const response = await axios.get(
-        "http://localhost:5000/upload_question",
+        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
         {
           params: { grade, subject, topic },
           headers: {
