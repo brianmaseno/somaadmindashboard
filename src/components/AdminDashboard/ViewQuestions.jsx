@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import "../../css/ViewQuestions.css"; // Adjust the path as necessary
-import { Link } from "react-router-dom"; // Import Link for navigation
 
 const ViewQuestions = () => {
   // State variables
@@ -34,7 +34,7 @@ const ViewQuestions = () => {
     try {
       // Simulate fetching questions from an API endpoint
       const response = await axios.get(
-        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
+        `${import.meta.VITE_BASE_URL}/view_questions`,
         {
           params: { grade, subject, topic },
           headers: {
