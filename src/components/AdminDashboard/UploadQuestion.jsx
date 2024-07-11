@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../css/UploadQuestion.css";
 import axios from "axios";
 
@@ -12,8 +12,6 @@ const UploadQuestion = () => {
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [image_url, setImageUrl] = useState(null);
-
-  const navigate = useNavigate();
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -55,24 +53,16 @@ const UploadQuestion = () => {
       );
       console.log(response);
       alert("Question uploaded successfully!");
-      navigate("/");
+      // Clear the form but remain on step 2
+      setQuestion("");
+      setOptions(["", "", "", ""]);
+      setCorrectAnswer(null);
+      setImageUrl(null);
     } catch (error) {
       console.error(error);
       alert("Failed to upload question. Please try again.");
     }
-    
-
-    // Clear the form
-    setGrade("");
-    setSubject("");
-    setTopic("");
-    setQuestion("");
-    setOptions(["", "", "", ""]);
-    setCorrectAnswer(null);
-    setImageUrl(null);
   };
-
-
 
   const handleCheckboxChange = (index) => {
     setCorrectAnswer(index);
@@ -206,4 +196,3 @@ const UploadQuestion = () => {
 };
 
 export default UploadQuestion;
-
