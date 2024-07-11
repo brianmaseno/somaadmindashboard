@@ -40,12 +40,12 @@ const UploadQuestion = () => {
     formData.append("options", JSON.stringify(options));
     formData.append("correct_answer", correctAnswer);
     if (image_url) {
-      formData.append("file", image_url);
+      formData.append("image_url", image_url);
     }
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/upload_question",
+        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
         formData,
         {
           headers: {
@@ -161,7 +161,6 @@ const UploadQuestion = () => {
                 onChange={handleImageChange}
               />
             </div>
-
             <div className="form-group">
               <label>Options:</label>
               {options.map((option, index) => (

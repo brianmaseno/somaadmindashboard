@@ -33,12 +33,15 @@ const ViewQuestions = () => {
     e.preventDefault();
     try {
       // Simulate fetching questions from an API endpoint
-      const response = await axios.get("http://localhost:5000/upload_question", {
-        params: { grade, subject, topic },
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.get(
+        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
+        {
+          params: { grade, subject, topic },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log(response.data);
       setQuestions(response.data);
       setShowQuestions(true);
