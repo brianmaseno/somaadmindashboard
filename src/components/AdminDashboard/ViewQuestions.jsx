@@ -34,7 +34,7 @@ const ViewQuestions = () => {
     try {
       // Simulate fetching questions from an API endpoint
       const response = await axios.get(
-        `${import.meta.VITE_BASE_URL}/view_questions`,
+        `${import.meta.env.VITE_BASE_URL}/upload_question`,
         {
           params: { grade, subject, topic },
           headers: {
@@ -43,11 +43,16 @@ const ViewQuestions = () => {
         }
       );
       console.log(response.data);
-      setQuestions(response.data);
+      if (Array.isArray(response.data)) {
+        setQuestions(response.data);
+      } else {
+        setQuestions([]); // Ensure questions is an array even if the response is unexpected
+      }
       setShowQuestions(true);
     } catch (error) {
       console.error("Error fetching questions:", error);
       // Handle error state or display error message
+      setQuestions([]);
     }
   };
 
@@ -142,3 +147,4 @@ const ViewQuestions = () => {
 };
 
 export default ViewQuestions;
+
