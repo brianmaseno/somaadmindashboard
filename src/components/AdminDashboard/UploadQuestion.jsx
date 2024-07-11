@@ -72,6 +72,8 @@ const UploadQuestion = () => {
     setImageUrl(null);
   };
 
+
+
   const handleCheckboxChange = (index) => {
     setCorrectAnswer(index);
   };
@@ -204,3 +206,4 @@ const UploadQuestion = () => {
 };
 
 export default UploadQuestion;
+
