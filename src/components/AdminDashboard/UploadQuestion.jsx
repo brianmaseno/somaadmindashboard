@@ -10,7 +10,7 @@ const UploadQuestion = () => {
   const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState(null); // Change this line
+  const [correctAnswer, setCorrectAnswer] = useState(null);
   const [image_url, setImageUrl] = useState(null);
 
   const navigate = useNavigate();
@@ -38,20 +38,10 @@ const UploadQuestion = () => {
     formData.append("topic", topic);
     formData.append("question", question);
     formData.append("options", JSON.stringify(options));
-    formData.append("correct_answer", correctAnswer); // Change this line
+    formData.append("correct_answer", correctAnswer);
     if (image_url) {
       formData.append("file", image_url);
     }
-
-    console.log({
-      grade,
-      subject,
-      topic,
-      question,
-      options,
-      correctAnswer, // Change this line
-      image_url,
-    });
 
     try {
       const response = await axios.post(
@@ -64,9 +54,11 @@ const UploadQuestion = () => {
         }
       );
       console.log(response);
+      alert("Question uploaded successfully!");
       navigate("/");
     } catch (error) {
       console.error(error);
+      alert("Failed to upload question. Please try again.");
     }
 
     // Clear the form
@@ -75,12 +67,12 @@ const UploadQuestion = () => {
     setTopic("");
     setQuestion("");
     setOptions(["", "", "", ""]);
-    setCorrectAnswer(null); // Change this line
+    setCorrectAnswer(null);
     setImageUrl(null);
   };
 
   const handleCheckboxChange = (index) => {
-    setCorrectAnswer(index); // Change this line
+    setCorrectAnswer(index);
   };
 
   return (
@@ -145,7 +137,6 @@ const UploadQuestion = () => {
           </form>
         </div>
       )}
-
       {step === 2 && (
         <div className="upload-question">
           <h2>
@@ -179,8 +170,8 @@ const UploadQuestion = () => {
                     <input
                       type="checkbox"
                       id={`option-${index}`}
-                      checked={correctAnswer === index} // Change this line
-                      onChange={() => handleCheckboxChange(index)} // Change this line
+                      checked={correctAnswer === index}
+                      onChange={() => handleCheckboxChange(index)}
                     />
                   </div>
                   <div className="answers">
