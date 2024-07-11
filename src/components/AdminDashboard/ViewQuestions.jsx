@@ -34,7 +34,7 @@ const ViewQuestions = () => {
     try {
       // Simulate fetching questions from an API endpoint
       const response = await axios.get(
-        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
+        `${import.meta.VITE_BASE_URL}/view_questions`,
         {
           params: { grade, subject, topic },
           headers: {

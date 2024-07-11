@@ -45,7 +45,7 @@ const UploadQuestion = () => {
 
     try {
       const response = await axios.post(
-        "https://philip-clicking-programming-capacity.trycloudflare.com/upload_question",
+        `${import.meta.env.VITE_BASE_URL}/upload_question`,
         formData,
         {
           headers: {
@@ -60,6 +60,7 @@ const UploadQuestion = () => {
       console.error(error);
       alert("Failed to upload question. Please try again.");
     }
+    
 
     // Clear the form
     setGrade("");
