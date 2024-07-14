@@ -11,7 +11,7 @@ const UploadQuestion = () => {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState(null);
-  const [image_url, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -37,8 +37,8 @@ const UploadQuestion = () => {
     formData.append("question", question);
     formData.append("options", JSON.stringify(options));
     formData.append("correct_answer", correctAnswer);
-    if (image_url) {
-      formData.append("image_url", image_url);
+    if (imageUrl) {
+      formData.append("image_url", imageUrl);
     }
 
     try {
