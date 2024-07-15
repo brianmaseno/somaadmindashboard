@@ -10,7 +10,7 @@ const UploadQuestion = () => {
   const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
 
   const handleOptionChange = (index, value) => {
@@ -56,7 +56,7 @@ const UploadQuestion = () => {
       // Clear the form but remain on step 2
       setQuestion("");
       setOptions(["", "", "", ""]);
-      setCorrectAnswer(null);
+      setCorrectAnswer("");
       setImageUrl(null);
     } catch (error) {
       console.error(error);
@@ -64,8 +64,8 @@ const UploadQuestion = () => {
     }
   };
 
-  const handleCheckboxChange = (index) => {
-    setCorrectAnswer(index);
+  const handleRadioChange = (value) => {
+    setCorrectAnswer(value);
   };
 
   return (
@@ -158,12 +158,13 @@ const UploadQuestion = () => {
               <label>Options:</label>
               {options.map((option, index) => (
                 <div key={index} className="option-container">
-                  <div className="option-checkbox">
+                  <div className="option-radio">
                     <input
-                      type="checkbox"
+                      type="radio"
+                      name="correct_answer"
                       id={`option-${index}`}
-                      checked={correctAnswer === index}
-                      onChange={() => handleCheckboxChange(index)}
+                      checked={correctAnswer === option}
+                      onChange={() => handleRadioChange(option)}
                     />
                   </div>
                   <div className="answers">
