@@ -30,6 +30,21 @@ const UploadQuestion = () => {
 
   const handleUploadSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation
+    if (!question.trim()) {
+      alert("Please enter the question text.");
+      return;
+    }
+    if (options.some((option) => !option.trim())) {
+      alert("Please fill out all options.");
+      return;
+    }
+    if (!correctAnswer.trim()) {
+      alert("Please select the correct answer.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("grade", grade);
     formData.append("subject", subject);
@@ -165,6 +180,7 @@ const UploadQuestion = () => {
                       id={`option-${index}`}
                       checked={correctAnswer === option}
                       onChange={() => handleRadioChange(option)}
+                      required
                     />
                   </div>
                   <div className="answers">
