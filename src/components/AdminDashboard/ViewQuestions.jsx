@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -10,24 +10,35 @@ const ViewQuestions = () => {
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
   const [questions, setQuestions] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [showQuestions, setShowQuestions] = useState(false);
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(null);
 
-  // Mock data for subjects and topics based on grade
-  const subjectsByGrade = {
-    1: ["Mathematics", "Science"],
-    2: ["Mathematics", "English"],
-    3: ["Science", "History"],
-    5: ["Mathematics", "Science"],
-  };
+  // Fetch subjects when grade is selected
+  useEffect(() => {
+    if (grade) {
+      axios
+        .get(`${import.meta.env.VITE_BASE_URL}/subjects`, { params: { grade } })
+        .then((response) => setSubjects(response.data))
+        .catch((error) => console.error("Error fetching subjects:", error));
+    } else {
+      setSubjects([]);
+    }
+  }, [grade]);
 
-  const topicsBySubject = {
-    Mathematics: ["Algebra", "Geometry", "Arithmetic"],
-    Science: ["Biology", "Chemistry", "Physics"],
-    English: ["Grammar", "Literature", "Writing"],
-    History: ["World History", "Ancient History", "Modern History"],
-  };
+  // Fetch topics when subject is selected
+  useEffect(() => {
+    if (subject) {
+      axios
+        .get(`${import.meta.env.VITE_BASE_URL}/topics`, { params: { subject } })
+        .then((response) => setTopics(response.data))
+        .catch((error) => console.error("Error fetching topics:", error));
+    } else {
+      setTopics([]);
+    }
+  }, [subject]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,7 +124,7 @@ const ViewQuestions = () => {
               required
             >
               <option value="">Select Subject</option>
-              {subjectsByGrade[grade]?.map((subj) => (
+              {subjects.map((subj) => (
                 <option key={subj} value={subj}>
                   {subj}
                 </option>
@@ -128,7 +139,7 @@ const ViewQuestions = () => {
               required
             >
               <option value="">Select Topic</option>
-              {topicsBySubject[subject]?.map((tpc) => (
+              {topics.map((tpc) => (
                 <option key={tpc} value={tpc}>
                   {tpc}
                 </option>
@@ -177,8 +188,8 @@ const ViewQuestions = () => {
                             {question.options.map((option, index) => (
                               <li key={index} className="option-container">
                                 <input
-                                  type="checkbox"
-                                  checked={question.correct_answer === index}
+                                  type="radio"
+                                  checked={question.correct_answer === option}
                                   readOnly
                                 />
                                 {option}
@@ -254,12 +265,12 @@ const EditQuestionForm = ({ question, onSave, onCancel }) => {
               required
             />
             <input
-              type="checkbox"
-              checked={updatedQuestion.correct_answer === index}
+              type="radio"
+              checked={updatedQuestion.correct_answer === option}
               onChange={() =>
                 setUpdatedQuestion({
                   ...updatedQuestion,
-                  correct_answer: index,
+                  correct_answer: option,
                 })
               }
             />
