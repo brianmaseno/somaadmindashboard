@@ -65,7 +65,6 @@ const ViewQuestions = () => {
     setLoading(true);
     try {
       const selectedSubject = subjects.find((s) => s.id === parseInt(subject));
-      // {topics.find((tpc) => tpc.id === parseInt(topic))?.name || ""}
       const selectedTopic = topics.find((tpc) => tpc.id === parseInt(topic));
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/upload_question`,
@@ -179,7 +178,7 @@ const ViewQuestions = () => {
           <Link
             to="/"
             className="back-button"
-            style={{ color: "red", textDecoration: "none" }}
+            style={{ color: "#dc3545", textDecoration: "none" }}
           >
             Back
           </Link>
@@ -250,9 +249,13 @@ const ViewQuestions = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/" className="back-button">
+              <button
+                onClick={() => setShowQuestions(false)}
+                className="back-button"
+                style={{ backgroundColor: "#dc3545", marginTop: "10px" }}
+              >
                 Back to Admin Dashboard
-              </Link>
+              </button>
             </div>
           )}
         </>
