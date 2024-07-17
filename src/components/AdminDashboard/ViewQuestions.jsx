@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types"; // Import PropTypes
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../css/ViewQuestions.css"; // Adjust the path as necessary
+import PropTypes from "prop-types";
+import "../../css/ViewQuestions.css";
 
 const ViewQuestions = () => {
-  // State variables
   const [grade, setGrade] = useState("");
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
@@ -16,41 +15,69 @@ const ViewQuestions = () => {
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(null);
 
-  // Fetch subjects when grade is selected
   useEffect(() => {
-    if (grade) {
-      axios
-        .get(`${import.meta.env.VITE_BASE_URL}/subjects`, { params: { grade } })
-        .then((response) => setSubjects(response.data))
-        .catch((error) => console.error("Error fetching subjects:", error));
-    } else {
+    if (!grade) {
       setSubjects([]);
+      return;
     }
+
+    // Fetch subjects based on grade
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/admin/subjects`, {
+        params: { grade },
+      })
+      .then((response) => {
+        console.log("Subjects Response:", response);
+        setSubjects(response.data);
+        // Reset subject and topic selections
+        setSubject("");
+        setTopic("");
+      })
+      .catch((error) => {
+        console.error("Error fetching subjects:", error);
+        setSubjects([]);
+      });
   }, [grade]);
 
-  // Fetch topics when subject is selected
   useEffect(() => {
-    if (subject) {
-      axios
-        .get(`${import.meta.env.VITE_BASE_URL}/topics`, { params: { subject } })
-        .then((response) => setTopics(response.data))
-        .catch((error) => console.error("Error fetching topics:", error));
-    } else {
+    if (!subject) {
       setTopics([]);
+      return;
     }
-  }, [subject]);
+
+    // Fetch topics based on selected subject
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/admin/topics/${subject}`, {
+        params: { grade },
+      })
+      .then((topicsResponse) => {
+        console.log("Topics Response:", topicsResponse);
+        setTopics(topicsResponse.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching topics:", error);
+        setTopics([]);
+      });
+  }, [subject, grade]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      const selectedSubject = subjects.find((s) => s.id === parseInt(subject));
+      // {topics.find((tpc) => tpc.id === parseInt(topic))?.name || ""}
+      const selectedTopic = topics.find((tpc) => tpc.id === parseInt(topic));
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/upload_question`,
         {
-          params: { grade, subject, topic },
+          params: {
+            grade,
+            subject: selectedSubject?.name || "",
+            topic: selectedTopic?.name,
+          },
         }
       );
-      setQuestions(Array.isArray(response.data) ? response.data : []);
+      setQuestions(response.data);
       setShowQuestions(true);
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -105,7 +132,7 @@ const ViewQuestions = () => {
             <label>Select Grade:</label>
             <select
               value={grade}
-              onChange={(e) => setGrade(parseInt(e.target.value))}
+              onChange={(e) => setGrade(e.target.value)}
               required
             >
               <option value="">Select Grade</option>
@@ -124,9 +151,9 @@ const ViewQuestions = () => {
               required
             >
               <option value="">Select Subject</option>
-              {subjects.map((subj) => (
-                <option key={subj} value={subj}>
-                  {subj}
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name}
                 </option>
               ))}
             </select>
@@ -140,8 +167,8 @@ const ViewQuestions = () => {
             >
               <option value="">Select Topic</option>
               {topics.map((tpc) => (
-                <option key={tpc} value={tpc}>
-                  {tpc}
+                <option key={tpc.id} value={tpc.id}>
+                  {tpc.name}
                 </option>
               ))}
             </select>
@@ -149,7 +176,11 @@ const ViewQuestions = () => {
           <button type="submit" className="admin-button">
             View Questions
           </button>
-          <Link to="/" className="back-button">
+          <Link
+            to="/"
+            className="back-button"
+            style={{ color: "red", textDecoration: "none" }}
+          >
             Back
           </Link>
         </form>
@@ -163,7 +194,10 @@ const ViewQuestions = () => {
                 Back
               </button>
               <h2>
-                Grade: {grade}, Subject: {subject}, Topic: {topic}
+                Grade: {grade}, Subject:{" "}
+                {subjects.find((s) => s.id === parseInt(subject))?.name || ""},
+                Topic:{" "}
+                {topics.find((tpc) => tpc.id === parseInt(topic))?.name || ""}
               </h2>
               <p>
                 <strong>Number of Questions:</strong> {questions.length}
@@ -266,11 +300,11 @@ const EditQuestionForm = ({ question, onSave, onCancel }) => {
             />
             <input
               type="radio"
-              checked={updatedQuestion.correct_answer === option}
+              checked={updatedQuestion.correct_answer === index}
               onChange={() =>
                 setUpdatedQuestion({
                   ...updatedQuestion,
-                  correct_answer: option,
+                  correct_answer: index,
                 })
               }
             />
@@ -289,7 +323,6 @@ const EditQuestionForm = ({ question, onSave, onCancel }) => {
   );
 };
 
-// Add prop types for EditQuestionForm
 EditQuestionForm.propTypes = {
   question: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,

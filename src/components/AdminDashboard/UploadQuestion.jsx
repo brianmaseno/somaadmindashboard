@@ -138,8 +138,26 @@ const UploadQuestion = () => {
                 required
               />
             </div>
-            <button type="submit">Next</button>
-            <Link to="/" className="back-button">
+            <div className="next-button">
+              <button type="submit">Next</button>
+            </div>
+            <Link
+              to="/"
+              className="back-button"
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                textDecoration: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                marginTop: "10px",
+                display: "inline-block",
+                transition: "background-color 0.3s",
+              }}
+              hoverStyle={{
+                backgroundColor: "lightcoral",
+              }}
+            >
               Back
             </Link>
           </form>
