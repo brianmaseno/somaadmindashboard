@@ -176,11 +176,7 @@ const ViewQuestions = () => {
           <button type="submit" className="admin-button">
             View Questions
           </button>
-          <Link
-            to="/"
-            className="back-button"
-            style={{ color: "#dc3545", textDecoration: "none" }}
-          >
+          <Link to="/" className="back-button">
             Back
           </Link>
         </form>

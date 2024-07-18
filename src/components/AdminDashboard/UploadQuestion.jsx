@@ -149,7 +149,7 @@ const UploadQuestion = () => {
                 backgroundColor: "red",
                 color: "white",
                 textDecoration: "none",
-                padding: "10px 20px",
+                padding: "10px 13px",
                 borderRadius: "5px",
                 marginTop: "10px",
                 display: "inline-block",

@@ -13,7 +13,7 @@ body {
 }
 
 .next-button button {
-  background-color: blue;
+  background-color: rgb(5, 5, 152);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -40,11 +40,12 @@ body {
 }
 
 .upload-question-form .back-button {
-  background-color: red;
+  background-color: rgb(217, 4, 4);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
+  width: 98%;
 }
 
 .upload-question-form .back-button:hover {

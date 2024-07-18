@@ -12,6 +12,23 @@
   border: 2px solid black;
 }
 
+.back-button {
+  display: inline-block;
+  padding: 6px 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 95%;
+}
+
+.back-button:hover {
+  background-color: #c82333;
+}
+
 .view-questions-container h1 {
   color: black;
 }
