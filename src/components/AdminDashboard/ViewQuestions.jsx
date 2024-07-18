@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../css/ViewQuestions.css";
+import "../../css/responsive.css";
 
 const ViewQuestions = () => {
   const [grade, setGrade] = useState("");

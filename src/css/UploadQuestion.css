@@ -1,3 +1,6 @@
+/* src/components/AdminDashboard/Upload.css */
+
+/* General styles */
 body {
   padding-left: 250px;
 }
@@ -15,7 +18,7 @@ body {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  width: 560px;
+  width: 100%;
   transition: background-color 0.3s;
 }
 
@@ -128,68 +131,6 @@ input[type="radio"] {
 }
 
 textarea {
-  /* src/components/AdminDashboard/UploadQuestion.css */
-
-  /* Styling for Next Button */
-  .upload-question-container .next-button button {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    width: 100%; /* Adjust width as needed */
-    transition: background-color 0.3s;
-  }
-
-  .upload-question-container .next-button button:hover {
-    background-color: lightblue;
-  }
-
-  /* Styling for Textarea */
-  .upload-question-container textarea {
-    background-color: black;
-    color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  /* Styling for Radio Buttons */
-  .upload-question-container .option-radio input[type="radio"] {
-    background-color: black;
-  }
-
-  /* Styling for Upload Button */
-  .upload-question-container .upload-question-form button[type="submit"] {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .upload-question-container .upload-question-form button[type="submit"]:hover {
-    background-color: lightgreen;
-  }
-
-  /* Styling for Back Button */
-  .upload-question-container .back-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-    transition: background-color 0.3s;
-  }
-
-  .upload-question-container .back-button:hover {
-    background-color: tomato;
-  }
-
   resize: vertical;
   min-height: 100px;
 }
@@ -199,4 +140,17 @@ input[type="checkbox"] {
   height: 20px;
   transform: scale(1.5);
   margin-top: 7px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  body {
+    padding-left: 0;
+  }
+
+  .upload-question-container,
+  .upload-selection,
+  .upload-question {
+    width: 90%;
+  }
 }

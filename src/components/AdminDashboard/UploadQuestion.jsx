@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/UploadQuestion.css";
+import "../../css/responsive.css";
 import axios from "axios";
 
 const UploadQuestion = () => {
