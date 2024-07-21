@@ -248,7 +248,7 @@ const ViewQuestions = () => {
               </ul>
               <button
                 onClick={() => setShowQuestions(false)}
-                className="back-button"
+                className="back-button-admin"
                 style={{ backgroundColor: "#dc3545", marginTop: "10px" }}
               >
                 Back to Admin Dashboard

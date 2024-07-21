@@ -77,7 +77,7 @@ button:hover {
 button.back-button {
   background-color: #dc3545;
   margin-top: 10px;
-  width: 80px;
+  width: 100px;
 }
 
 .question-list {
@@ -126,7 +126,7 @@ button.back-button {
 }
 
 .actions .admin-button:hover {
-  background-color: #ffc107;
+  background-color: #2cb410;
 }
 
 .actions .back-button:hover {
