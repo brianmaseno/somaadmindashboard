@@ -2,7 +2,10 @@
 
 /* General styles */
 body {
-  padding-left: 250px;
+  display: flex;
+  align-items: center; /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  height: 100vh;
 }
 
 .upload-question-container {
@@ -101,6 +104,7 @@ input[type="radio"] {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  margin: 0 auto; /* Center horizontally */
 }
 
 .upload-selection h2,
