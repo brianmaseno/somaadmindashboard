@@ -1,20 +1,14 @@
 /* src/components/AdminDashboard/Upload.css */
 
-/* General styles */
-body {
-  display: flex;
-  align-items: center; /* vertical centering */
-  justify-content: center; /* horizontal centering */
-  height: 100vh;
-}
-
 .upload-question-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
 }
-
+.upload-selection h2 {
+  font-size: 40px;
+  margin-top: 0px;
+}
 .next-button button {
   background-color: rgb(5, 5, 152);
   color: white;
@@ -86,7 +80,6 @@ input[type="radio"] {
 
 .answers {
   width: 90%;
-  margin-bottom: 5px;
 }
 
 .option-container {
@@ -103,10 +96,13 @@ input[type="radio"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+.upload-selection {
+  width: 100vh;
+}
 .upload-selection h2,
 .upload-question h2 {
   margin-bottom: 20px;
@@ -120,6 +116,7 @@ input[type="radio"] {
 
 .form-group {
   margin-bottom: 15px;
+  width: 40vw;
 }
 
 .form-group label {

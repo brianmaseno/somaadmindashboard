@@ -124,64 +124,66 @@ const ViewQuestions = () => {
   };
 
   return (
-    <div className="view-questions-container">
-      <h1>View Questions</h1>
+    <div className="view-questions-page">
       {!showQuestions ? (
-        <form onSubmit={handleSubmit} className="view-questions-form">
-          <div className="form-group">
-            <label>Select Grade:</label>
-            <select
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-              required
-            >
-              <option value="">Select Grade</option>
-              {Array.from({ length: 8 }, (_, index) => (
-                <option key={`grade-${index + 1}`} value={index + 1}>
-                  Grade {index + 1}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Select Subject:</label>
-            <select
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-            >
-              <option value="">Select Subject</option>
-              {subjects.map((subject) => (
-                <option key={subject.id} value={subject.id}>
-                  {subject.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Select Topic:</label>
-            <select
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              required
-            >
-              <option value="">Select Topic</option>
-              {topics.map((tpc) => (
-                <option key={tpc.id} value={tpc.id}>
-                  {tpc.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button type="submit" className="admin-button">
-            View Questions
-          </button>
-          <Link to="/" className="back-button">
-            Back
-          </Link>
-        </form>
+        <div className="view-questions-container">
+          <h1>View Questions</h1>
+          <form onSubmit={handleSubmit} className="view-questions-form">
+            <div className="form-group">
+              <label>Select Grade:</label>
+              <select
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                required
+              >
+                <option value="">Select Grade</option>
+                {Array.from({ length: 8 }, (_, index) => (
+                  <option key={`grade-${index + 1}`} value={index + 1}>
+                    Grade {index + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Select Subject:</label>
+              <select
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+              >
+                <option value="">Select Subject</option>
+                {subjects.map((subject) => (
+                  <option key={subject.id} value={subject.id}>
+                    {subject.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Select Topic:</label>
+              <select
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                required
+              >
+                <option value="">Select Topic</option>
+                {topics.map((tpc) => (
+                  <option key={tpc.id} value={tpc.id}>
+                    {tpc.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button type="submit" className="admin-button">
+              View Questions
+            </button>
+            <Link to="/" className="back-button">
+              Back
+            </Link>
+          </form>
+        </div>
       ) : (
-        <>
+        <div className="question-list-container">
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -246,16 +248,9 @@ const ViewQuestions = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={() => setShowQuestions(false)}
-                className="back-button-admin"
-                style={{ backgroundColor: "#dc3545", marginTop: "10px" }}
-              >
-                Back to Admin Dashboard
-              </button>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

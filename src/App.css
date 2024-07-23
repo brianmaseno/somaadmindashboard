@@ -2,10 +2,16 @@
 
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
 }
 
 .button-container {
   margin-top: 20px;
+  width: 40vw;
 }
 
 .admin-button {
@@ -21,7 +27,8 @@
 }
 
 .admin-button:hover {
-  background-color: #0056b3;
+  background-color: #aefd89;
+  color: white;
 }
 
 h1 {

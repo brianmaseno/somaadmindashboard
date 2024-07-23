@@ -18,7 +18,8 @@
 .logo {
   width: 200px;
   height: auto;
-  margin-top: 18px;
+  margin-top: 300px;
+  margin-bottom: 6px;
 }
 
 a {
@@ -35,8 +36,11 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 h1 {
