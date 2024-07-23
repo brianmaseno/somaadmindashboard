@@ -46,6 +46,11 @@ h1 {
   margin-bottom: 20px;
   color: #333;
 }
+.question-box {
+  display: flex;
+  align-items: row;
+  width: 50vw;
+}
 
 .form-group {
   margin-bottom: 15px;
@@ -90,15 +95,21 @@ button.back-button {
 
 .question-list-container {
   width: 100vh;
-  margin-top: 20px;
+  margin-top: 4200px;
 }
 
 .question-list {
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-
+.top-part {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 50vw;
+  align-items: center;
+  border: 3px dotted black;
+}
 .question-item {
   padding: 15px;
   background-color: #ffffff;
@@ -141,6 +152,7 @@ button.back-button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 7vw;
 }
 
 .actions .admin-button:hover {

@@ -188,66 +188,71 @@ const ViewQuestions = () => {
             <div>Loading...</div>
           ) : (
             <div className="question-list">
-              <button className="back-button" onClick={handleBack}>
-                Back
-              </button>
-              <h2>
-                Grade: {grade}, Subject:{" "}
-                {subjects.find((s) => s.id === parseInt(subject))?.name || ""},
-                Topic:{" "}
-                {topics.find((tpc) => tpc.id === parseInt(topic))?.name || ""}
-              </h2>
-              <p>
-                <strong>Number of Questions:</strong> {questions.length}
-              </p>
-              <ul>
-                {questions.map((question) => (
-                  <li key={question.id} className="question-item">
-                    {editMode === question.id ? (
-                      <EditQuestionForm
-                        question={question}
-                        onSave={handleUpdate}
-                        onCancel={() => setEditMode(null)}
-                      />
-                    ) : (
-                      <>
-                        <div>
-                          <strong>Question:</strong> {question.question}
-                        </div>
-                        <div>
-                          <strong>Options:</strong>
-                          <ul>
-                            {question.options.map((option, index) => (
-                              <li key={index} className="option-container">
-                                <input
-                                  type="radio"
-                                  checked={question.correct_answer === option}
-                                  readOnly
-                                />
-                                {option}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div className="actions">
-                          <button
-                            onClick={() => handleEdit(question.id)}
-                            className="admin-button"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDelete(question.id)}
-                            className="back-button"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </>
-                    )}
-                  </li>
-                ))}
-              </ul>
+              <div className="top-part">
+                <button className="back-button" onClick={handleBack}>
+                  Back
+                </button>
+                <h2>
+                  Grade: {grade}, Subject:{" "}
+                  {subjects.find((s) => s.id === parseInt(subject))?.name || ""}
+                  , Topic:{" "}
+                  {topics.find((tpc) => tpc.id === parseInt(topic))?.name || ""}
+                </h2>
+                <p>
+                  <strong>Number of Questions:</strong> {questions.length}
+                </p>
+              </div>
+              <div className="question-box">
+                <div className="question-grid">
+                  {questions.map((question, index) => (
+                    <div key={question.id} className="question-item">
+                      <div className="question-number">{index + 1}</div>
+                      {editMode === question.id ? (
+                        <EditQuestionForm
+                          question={question}
+                          onSave={handleUpdate}
+                          onCancel={() => setEditMode(null)}
+                        />
+                      ) : (
+                        <>
+                          <div>
+                            <strong>Question:</strong> {question.question}
+                          </div>
+                          <div>
+                            <strong>Options:</strong>
+                            <div className="options">
+                              {question.options.map((option, idx) => (
+                                <div key={idx} className="option-container">
+                                  <input
+                                    type="radio"
+                                    checked={question.correct_answer === option}
+                                    readOnly
+                                  />
+                                  {option}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="actions">
+                            <button
+                              onClick={() => handleEdit(question.id)}
+                              className="admin-button"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleDelete(question.id)}
+                              className="back-button"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
         </div>
