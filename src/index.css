@@ -15,12 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.logo {
+/* .logo {
   width: 200px;
   height: auto;
-  margin-top: 300px;
+  margin-top: 200px;
   margin-bottom: 6px;
-}
+} */
 
 a {
   font-weight: 500;

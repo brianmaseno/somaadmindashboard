@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import UploadQuestion from "./components/AdminDashboard/UploadQuestion";
 import ViewQuestions from "./components/AdminDashboard/ViewQuestions";
@@ -17,7 +15,9 @@ const App = () => {
           className="logo"
           style={{ transform: "scale(1.8)" }}
         />
-        <h1 style={{ color: "black" }}>Welcome to Admin Dashboard</h1>
+        <div className="admin-header">
+          <h1>Welcome to Admin Dashboard</h1>
+        </div>
         <Routes>
           <Route
             path="/"

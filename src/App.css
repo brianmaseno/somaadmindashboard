@@ -6,14 +6,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90vw;
 }
 
 .button-container {
   margin-top: 20px;
   width: 40vw;
+  display: flex;
+  flex-direction: row;
 }
-
+.admin-header {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.admin-header h1 {
+  color: black;
+}
 .admin-button {
   display: inline-block;
   padding: 10px 20px;
@@ -25,7 +32,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.logo {
+  margin-top: 0px;
+  width: 15vw;
+}
 .admin-button:hover {
   background-color: #aefd89;
   color: white;
@@ -33,7 +43,7 @@
 
 h1 {
   margin-top: 43px;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 /* Media queries */
@@ -46,4 +56,8 @@ h1 {
   h1 {
     font-size: 2.4em;
   }
+}
+/* Ensure this is included at the bottom of your CSS file */
+.hide-logo .logo {
+  display: none;
 }

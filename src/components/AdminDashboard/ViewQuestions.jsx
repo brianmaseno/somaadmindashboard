@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../css/ViewQuestions.css";
-import "../../css/responsive.css";
 
 const ViewQuestions = () => {
   const [grade, setGrade] = useState("");
@@ -126,7 +125,7 @@ const ViewQuestions = () => {
   return (
     <div className="view-questions-page">
       {!showQuestions ? (
-        <div className="view-questions-container">
+        <div className="form-container">
           <h1>View Questions</h1>
           <form onSubmit={handleSubmit} className="view-questions-form">
             <div className="form-group">
@@ -183,7 +182,7 @@ const ViewQuestions = () => {
           </form>
         </div>
       ) : (
-        <div className="question-list-container">
+        <div className="questions-container">
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -202,56 +201,54 @@ const ViewQuestions = () => {
                   <strong>Number of Questions:</strong> {questions.length}
                 </p>
               </div>
-              <div className="question-box">
-                <div className="question-grid">
-                  {questions.map((question, index) => (
-                    <div key={question.id} className="question-item">
-                      <div className="question-number">{index + 1}</div>
-                      {editMode === question.id ? (
-                        <EditQuestionForm
-                          question={question}
-                          onSave={handleUpdate}
-                          onCancel={() => setEditMode(null)}
-                        />
-                      ) : (
-                        <>
-                          <div>
-                            <strong>Question:</strong> {question.question}
+              <div className="question-grid">
+                {questions.map((question, index) => (
+                  <div key={question.id} className="question-item">
+                    <div className="question-number">{index + 1}</div>
+                    {editMode === question.id ? (
+                      <EditQuestionForm
+                        question={question}
+                        onSave={handleUpdate}
+                        onCancel={() => setEditMode(null)}
+                      />
+                    ) : (
+                      <>
+                        <div>
+                          <strong>Question:</strong> {question.question}
+                        </div>
+                        <div>
+                          <strong>Options:</strong>
+                          <div className="options">
+                            {question.options.map((option, idx) => (
+                              <div key={idx} className="option-container">
+                                <input
+                                  type="radio"
+                                  checked={question.correct_answer === option}
+                                  readOnly
+                                />
+                                {option}
+                              </div>
+                            ))}
                           </div>
-                          <div>
-                            <strong>Options:</strong>
-                            <div className="options">
-                              {question.options.map((option, idx) => (
-                                <div key={idx} className="option-container">
-                                  <input
-                                    type="radio"
-                                    checked={question.correct_answer === option}
-                                    readOnly
-                                  />
-                                  {option}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="actions">
-                            <button
-                              onClick={() => handleEdit(question.id)}
-                              className="admin-button"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleDelete(question.id)}
-                              className="back-button"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                        </div>
+                        <div className="actions">
+                          <button
+                            onClick={() => handleEdit(question.id)}
+                            className="admin-button"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(question.id)}
+                            className="back-button"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           )}

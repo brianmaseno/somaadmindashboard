@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/UploadQuestion.css";
-import "../../css/responsive.css";
+
 import axios from "axios";
 
 const UploadQuestion = () => {
@@ -85,7 +85,8 @@ const UploadQuestion = () => {
   };
 
   return (
-    <div className="upload-question-container">
+    <div className="upload-question-container ">
+      <h1>Upload Question</h1>
       {step === 1 && (
         <div className="upload-selection">
           <h2>Select Details</h2>
@@ -93,7 +94,7 @@ const UploadQuestion = () => {
             onSubmit={handleSelectionSubmit}
             className="upload-selection-form"
           >
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="grade">Grade:</label>
               <select
                 id="grade"
@@ -112,7 +113,7 @@ const UploadQuestion = () => {
                 <option value="8">Grade 8</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="subject">Subject:</label>
               <select
                 id="subject"
@@ -129,7 +130,7 @@ const UploadQuestion = () => {
                 <option value="Computer Science">Computer Science</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="topic">Topic:</label>
               <input
                 type="text"
@@ -149,11 +150,10 @@ const UploadQuestion = () => {
                 backgroundColor: "red",
                 color: "white",
                 textDecoration: "none",
-                padding: "10px 13px",
                 borderRadius: "5px",
                 marginTop: "10px",
-                display: "inline-block",
                 transition: "background-color 0.3s",
+                width: "44vw",
               }}
               hoverStyle={{
                 backgroundColor: "lightcoral",
