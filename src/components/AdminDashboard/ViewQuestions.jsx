@@ -188,7 +188,7 @@ const ViewQuestions = () => {
           ) : (
             <div className="question-list">
               <div className="top-part">
-                <button className="back-button" onClick={handleBack}>
+                <button className="back-buttons" onClick={handleBack}>
                   Back
                 </button>
                 <h2>
