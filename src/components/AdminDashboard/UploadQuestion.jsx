@@ -216,7 +216,9 @@ const UploadQuestion = () => {
                 </div>
               ))}
             </div>
+            <div className="upload-button">
             <button type="submit">Upload Question</button>
+            </div>
             <button
               type="button"
               className="back-button"
