@@ -1,6 +1,6 @@
 /* src/components/AdminDashboard/ViewQuestions.css */
 
-.view-questions-container {
+/* .view-questions-container {
   width: 50vw;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 /* .question-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -63,14 +63,13 @@ form {
   display: flex;
   flex-direction: column;
   width: 50vw;
-  height: auto;
 }
 
-label {
+/* label {
   margin-bottom: 5px;
   font-weight: bold;
   color: #555;
-}
+} */
 
 select,
 button {
@@ -98,21 +97,18 @@ button.back-button {
   width: 45vh;
 }
 
-.question-list-container {
-  width: 100vh;
-  margin-top: 4400px;
-}
-
 .question-list {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-.top-part {
+  /* grid-template-columns: repeat(3, 1fr); */
+  height: 45vh;
+  width: 150vh;
   display: flex;
   flex-direction: column;
+}
+.top-part {
+  /* display: flex;
+  flex-direction: column; */
   margin-bottom: 15px;
   width: 50vw;
-  align-items: center;
   border: 3px dotted black;
 }
 .question-item {
@@ -120,6 +116,8 @@ button.back-button {
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 20vw;
+  height: 70vh;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
