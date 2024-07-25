@@ -12,11 +12,11 @@
   flex-direction: column;
   align-items: center;
 } */
-/* .question-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-} */
+.question-grid {
+  display: flex;
+  flex-wrap: wrap; /* Allows the items to wrap to the next line */
+  gap: 16px; /* Adjust the gap between items as needed */
+}
 .view-questions-form {
   display: flex;
   flex-direction: column;
@@ -101,11 +101,7 @@ button {
 } */
 
 .question-list {
-  /* grid-template-columns: repeat(3, 1fr); */
-  height: 45vh;
-  width: 150vh;
-  display: flex;
-  flex-direction: column;
+  height: 50vh;
 }
 .top-part {
   /* display: flex;
@@ -120,15 +116,17 @@ button {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 .question-item {
-  padding: 15px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  width: 20vw;
-  height: 70vh;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  height: auto;
 }
-
+.question-item:hover {
+  background-color: #f0f0f0; /* Brighter background color on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow on hover */
+}
 .option-container {
   margin-bottom: 8px;
 }
@@ -160,6 +158,7 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
 }
+
 .actions {
   margin-top: 10px;
 }
@@ -176,7 +175,7 @@ button {
   width: 100vw;
   display: flex;
   justify-content: center;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 .actions .admin-button,
 .actions .back-button {
