@@ -122,10 +122,12 @@ button {
   box-sizing: border-box;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
   height: auto;
+  width: 18vw;
 }
 .question-item:hover {
   background-color: #f0f0f0; /* Brighter background color on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: grabbing; /* Slight shadow on hover */
 }
 .option-container {
   margin-bottom: 8px;
