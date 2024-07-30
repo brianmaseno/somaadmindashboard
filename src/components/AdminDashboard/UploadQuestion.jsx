@@ -85,7 +85,7 @@ const UploadQuestion = () => {
   };
 
   return (
-    <div className="upload-question-container ">
+    <div className="upload-question-container">
       <h1>Upload Question</h1>
       {step === 1 && (
         <div className="upload-selection">
@@ -143,22 +143,7 @@ const UploadQuestion = () => {
             <div className="next-button">
               <button type="submit">Next</button>
             </div>
-            <Link
-              to="/"
-              className="back-button"
-              style={{
-                backgroundColor: "red",
-                color: "white",
-                textDecoration: "none",
-                borderRadius: "5px",
-                marginTop: "10px",
-                transition: "background-color 0.3s",
-                width: "44vw",
-              }}
-              hoverStyle={{
-                backgroundColor: "lightcoral",
-              }}
-            >
+            <Link to="/" className="back-button">
               Back
             </Link>
           </form>
@@ -216,8 +201,9 @@ const UploadQuestion = () => {
                 </div>
               ))}
             </div>
+
             <div className="upload-button">
-            <button type="submit">Upload Question</button>
+              <button type="submit">Upload Question</button>
             </div>
             <button
               type="button"

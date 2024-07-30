@@ -1,20 +1,37 @@
 /* src/components/AdminDashboard/Upload.css */
 
 .upload-question-container {
-  width: 120vw;
+  width: 90vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: 0px;
 }
 .upload-selection h2 {
   font-size: 40px;
   margin-top: 0px;
 }
-.next-button {
-  margin-top: 0px;
-  width: 40vw;
+.back-button {
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+  /* display: inline-block; */
+  width: 42vw;
 }
+
+.back-button:hover {
+  background-color: rgb(180, 10, 10);
+  color: white;
+}
+/* .next-button {
+  margin-top: 0px;
+  width: 42vw;
+} */
 .next-button button {
   background-color: rgb(5, 5, 152);
   color: white;
@@ -40,7 +57,7 @@
   padding: 10px 20px;
   cursor: pointer;
   margin-right: 10px;
-  width: 44vw;
+  width: 43vw;
 }
 
 .upload-question-form button[type="submit"]:hover {
@@ -53,10 +70,10 @@
   border: none;
   padding: 10px 10px;
   cursor: pointer;
-  width: 98%;
+  width: 46vw;
 }
 */ .upload-question-form .back-button:hover {
-  background-color: rgb(250, 89, 89);
+  background-color: rgb(121, 5, 5);
 }
 
 textarea,
@@ -112,6 +129,7 @@ input[type="radio"] {
 
 .upload-question {
   padding: 10px;
+  margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -146,7 +164,7 @@ input[type="radio"] {
 }
 .form-groups {
   margin-bottom: 10px;
-  width: 45vw;
+  width: 46vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

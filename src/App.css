@@ -9,10 +9,12 @@
 }
 
 .button-container {
-  margin-top: 20px;
+  margin: 20px auto; /* Center the button container horizontally */
   width: 40vw;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center; /* Center the buttons horizontally */
 }
 .admin-header {
   margin-bottom: 0;
@@ -20,6 +22,7 @@
 }
 .admin-header h1 {
   color: black;
+  justify-content: center;
 }
 .admin-button {
   display: inline-block;
@@ -60,4 +63,9 @@ h1 {
 /* Ensure this is included at the bottom of your CSS file */
 .hide-logo .logo {
   display: none;
+}
+.no-overlap {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px; /* Adjust the margin as needed */
 }

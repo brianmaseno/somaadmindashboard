@@ -9,26 +9,30 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <img
-          src={logo}
-          alt="Project Logo"
-          className="logo"
-          style={{ transform: "scale(1.8)" }}
-        />
-        <div className="admin-header">
-          <h1>Welcome to Admin Dashboard</h1>
-        </div>
         <Routes>
           <Route
             path="/"
             element={
-              <div className="button-container">
-                <Link to="/upload-question" className="admin-button">
-                  Upload Question
-                </Link>
-                <Link to="/view-questions" className="admin-button">
-                  View Questions
-                </Link>
+              <div className="admin-dashboard">
+                <div className="somapp-logo">
+                  <img
+                    src={logo}
+                    alt="Project Logo"
+                    className="logo"
+                    style={{ transform: "scale(1.8)" }}
+                  />
+                </div>
+                <div className="admin-header">
+                  <h1>Welcome to Admin Dashboard</h1>
+                </div>
+                <div className="button-container">
+                  <Link to="/upload-question" className="admin-button">
+                    Upload Question
+                  </Link>
+                  <Link to="/view-questions" className="admin-button">
+                    View Questions
+                  </Link>
+                </div>
               </div>
             }
           />
