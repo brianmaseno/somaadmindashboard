@@ -17,10 +17,10 @@
   flex-wrap: wrap; /* Allows the items to wrap to the next line */
   gap: 16px; /* Adjust the gap between items as needed */
 }
-.view-questions-form {
+/* .view-questions-form {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .back-button {
   display: inline-block;
@@ -40,7 +40,7 @@
 }
 
 .view-questions-container h1 {
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 /* h1 {
@@ -55,10 +55,13 @@
 } */
 
 .form-group {
-  margin-bottom: 15px;
-  width: 45vw;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+
+.form-group label {
+  text-align: center;
+  margin-right: 10px;
 }
 
 /* form {
@@ -99,7 +102,11 @@ button {
   margin-top: 10px;
   width: 45vh;
 } */
-
+.somapp-logo1 img {
+  width: 20vw;
+  margin-top: -160px;
+  margin-bottom: 20px;
+}
 .question-list {
   height: 50vh;
 }
@@ -114,6 +121,7 @@ button {
   width: 70vw;
   border: 1px solid #ddd;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  margin-top: -25px;
 }
 .question-item {
   border: 1px solid #ccc;
@@ -132,6 +140,23 @@ button {
 .option-container {
   margin-bottom: 8px;
 }
+.back-button-view {
+  display: inline-block;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 46vw;
+}
+
+.back-button-view:hover {
+  background-color: #810411;
+  color: white;
+}
 
 .option-container input[type="radio"] {
   width: 16px;
@@ -139,13 +164,14 @@ button {
   margin-right: 8px;
 }
 .form-container {
-  width: 100vh;
+  width: 50vw;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .form-container h1 {
   color: black;
@@ -166,7 +192,7 @@ button {
 }
 
 .admin-button {
-  width: 45vw;
+  width: 47vw;
 }
 /* .view-questions-form {
   display: flex;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../css/ViewQuestions.css";
+import logo from "../../assets/soma1.png";
 
 const ViewQuestions = () => {
   const [grade, setGrade] = useState("");
@@ -176,7 +177,7 @@ const ViewQuestions = () => {
             <button type="submit" className="admin-button">
               View Questions
             </button>
-            <Link to="/" className="back-button">
+            <Link to="/" className="back-button-view">
               Back
             </Link>
           </form>
@@ -187,6 +188,14 @@ const ViewQuestions = () => {
             <div>Loading...</div>
           ) : (
             <div className="question-list">
+              <div className="somapp-logo1">
+                <img
+                  src={logo}
+                  alt="Project Logo"
+                  className="logo"
+                  // style={{ transform: "scale(1.8)" }}
+                />
+              </div>
               <div className="top-part">
                 <button className="back-buttons" onClick={handleBack}>
                   Back
