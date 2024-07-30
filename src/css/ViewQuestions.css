@@ -54,15 +54,22 @@
   width: 100vw;
 } */
 
-.form-group {
+.form-group1 {
+  margin-bottom: 15px;
+  /* width: 48vw; */
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
-
-.form-group label {
-  text-align: center;
-  margin-right: 10px;
+select {
+  width: 47vw; /* Adjust the width as needed */
 }
+
+/* .form-group1 label {
+  text-align: center;
+  width: 50vw;
+  height: 5vh;
+} */
 
 /* form {
   margin-bottom: 15px;

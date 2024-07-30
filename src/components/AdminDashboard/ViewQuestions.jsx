@@ -129,7 +129,7 @@ const ViewQuestions = () => {
         <div className="form-container">
           <h1>View Questions</h1>
           <form onSubmit={handleSubmit} className="view-questions-form">
-            <div className="form-group">
+            <div className="form-group1">
               <label>Select Grade:</label>
               <select
                 value={grade}
@@ -144,7 +144,7 @@ const ViewQuestions = () => {
                 ))}
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Select Subject:</label>
               <select
                 value={subject}
@@ -159,7 +159,7 @@ const ViewQuestions = () => {
                 ))}
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Select Topic:</label>
               <select
                 value={topic}
