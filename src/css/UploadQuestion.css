@@ -12,34 +12,36 @@
   font-size: 40px;
   margin-top: 0px;
 }
-.back-button {
-  background-color: red;
-  color: white;
+
+.back-button1 {
+  background-color: #ce0b0b;
+  color: #fff;
+  padding: 10px 0;
+  margin: 5px;
+  width: 43vw; /* Adjust the width as needed */
+  text-align: center;
   text-decoration: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-top: 10px;
-  transition: background-color 0.3s;
-  /* display: inline-block; */
-  width: 42vw;
+  border-radius: 4px;
+  font-size: 16px;
+  display: inline-block; /* Ensure it behaves like a button */
 }
 
 .back-button:hover {
-  background-color: rgb(180, 10, 10);
-  color: white;
+  background-color: #ff0000; /* Bright red */
 }
 /* .next-button {
   margin-top: 0px;
   width: 42vw;
 } */
-.next-button button {
+.next-button1 button {
   background-color: rgb(5, 5, 152);
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  width: 45vw;
+  width: 43vw;
   transition: background-color 0.3s;
+  margin: 5px;
 }
 .upload-question-container h1 {
   color: black;
@@ -133,6 +135,7 @@ input[type="radio"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
@@ -143,9 +146,6 @@ input[type="radio"] {
   flex-direction: column;
 }
 .upload-selection h2 {
-  margin-bottom: 20px;
-}
-.upload-question h2 {
   margin-bottom: 20px;
 }
 
@@ -162,22 +162,36 @@ input[type="radio"] {
   flex-direction: column;
   align-items: center;
 }
-.form-groups {
-  margin-bottom: 10px;
-  width: 46vw;
+.form-groups2 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.form-groups2 label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-groups2 select,
+.form-groups2 input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 43vw;
 }
 
 .form-group label {
   margin-bottom: 5px;
   font-weight: bold;
 }
-.form-groups label {
+/* .form-groups label {
   margin-bottom: 5px;
   font-weight: bold;
-}
+} */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -185,13 +199,13 @@ input[type="radio"] {
   padding: 8px;
   box-sizing: border-box;
 }
-.form-groups input,
+/* .form-groups input,
 .form-groups select,
 .form-groups textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-}
+} */
 textarea {
   resize: vertical;
   min-height: 100px;
@@ -202,6 +216,9 @@ input[type="checkbox"] {
   height: 20px;
   transform: scale(1.5);
   margin-top: 7px;
+}
+.upload-question h2 {
+  margin-top: 20px;
 }
 
 /* Media queries */

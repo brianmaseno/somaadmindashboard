@@ -13,15 +13,12 @@ const UploadQuestion = () => {
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // New state for loading
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
     newOptions[index] = value;
     setOptions(newOptions);
-  };
-
-  const handleImageChange = (e) => {
-    setImageUrl(e.target.files[0]);
   };
 
   const handleSelectionSubmit = (e) => {
@@ -31,18 +28,22 @@ const UploadQuestion = () => {
 
   const handleUploadSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Set loading state to true
 
     // Validation
     if (!question.trim()) {
       alert("Please enter the question text.");
+      setIsLoading(false); // Reset loading state
       return;
     }
     if (options.some((option) => !option.trim())) {
       alert("Please fill out all options.");
+      setIsLoading(false); // Reset loading state
       return;
     }
     if (!correctAnswer.trim()) {
       alert("Please select the correct answer.");
+      setIsLoading(false); // Reset loading state
       return;
     }
 
@@ -77,6 +78,8 @@ const UploadQuestion = () => {
     } catch (error) {
       console.error(error);
       alert("Failed to upload question. Please try again.");
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
   };
 
@@ -94,7 +97,7 @@ const UploadQuestion = () => {
             onSubmit={handleSelectionSubmit}
             className="upload-selection-form"
           >
-            <div className="form-groups">
+            <div className="form-groups2">
               <label htmlFor="grade">Grade:</label>
               <select
                 id="grade"
@@ -113,7 +116,7 @@ const UploadQuestion = () => {
                 <option value="8">Grade 8</option>
               </select>
             </div>
-            <div className="form-groups">
+            <div className="form-groups2">
               <label htmlFor="subject">Subject:</label>
               <select
                 id="subject"
@@ -130,7 +133,7 @@ const UploadQuestion = () => {
                 <option value="Computer Science">Computer Science</option>
               </select>
             </div>
-            <div className="form-groups">
+            <div className="form-groups2">
               <label htmlFor="topic">Topic:</label>
               <input
                 type="text"
@@ -140,10 +143,10 @@ const UploadQuestion = () => {
                 required
               />
             </div>
-            <div className="next-button">
+            <div className="next-button1">
               <button type="submit">Next</button>
             </div>
-            <Link to="/" className="back-button">
+            <Link to="/" className="back-button1">
               Back
             </Link>
           </form>
@@ -164,7 +167,7 @@ const UploadQuestion = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="image_url">Image (optional):</label>
               <input
                 type="file"
@@ -172,7 +175,7 @@ const UploadQuestion = () => {
                 accept="image/*"
                 onChange={handleImageChange}
               />
-            </div>
+            </div> */}
             <div className="form-group">
               <label>Options:</label>
               {options.map((option, index) => (
@@ -203,7 +206,9 @@ const UploadQuestion = () => {
             </div>
 
             <div className="upload-button">
-              <button type="submit">Upload Question</button>
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? "Loading..." : "Upload Question"}
+              </button>
             </div>
             <button
               type="button"
