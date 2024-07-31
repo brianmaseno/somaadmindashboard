@@ -321,7 +321,7 @@ const EditQuestionForm = ({ question, onSave, onCancel }) => {
         <button type="submit" className="admin-button">
           Save
         </button>
-        <button type="button" onClick={onCancel} className="back-button">
+        <button type="button" onClick={onCancel} className="back-button-last">
           Cancel
         </button>
       </div>

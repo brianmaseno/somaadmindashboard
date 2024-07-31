@@ -94,7 +94,7 @@ button {
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
   height: auto;
   width: 100%; /* Adjusted for better responsiveness */
-  max-width: 250px; /* Adjusted for better responsiveness */
+  max-width: 500px; /* Adjusted for better responsiveness */
   margin: 0 auto;
 }
 
@@ -144,7 +144,15 @@ button {
   align-items: center;
   margin-top: -100px;
 }
-
+.back-button-last {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(210, 72, 72);
+  margin-top: 10px;
+}
+.back-button-last :hover {
+  background-color: #810411;
+}
 .form-container h1 {
   color: black;
 }
@@ -219,7 +227,7 @@ button {
 
 .edit-question-form input[type="text"] {
   width: 100%;
-  max-width: 200px; /* Adjusted for better responsiveness */
+  max-width: 300px; /* Adjusted for better responsiveness */
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
