@@ -1,7 +1,8 @@
 /* src/components/AdminDashboard/ViewQuestions.css */
 
 /* .view-questions-container {
-  width: 50vw;
+  width: 800vw;
+
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #ffffff;
@@ -12,15 +13,15 @@
   flex-direction: column;
   align-items: center;
 } */
+
 .question-grid {
-  display: flex;
-  flex-wrap: wrap; /* Allows the items to wrap to the next line */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Adjusted for better responsiveness */
   gap: 16px; /* Adjust the gap between items as needed */
 }
-/* .view-questions-form {
-  display: flex;
-  flex-direction: column;
-} */
 
 .back-button {
   display: inline-block;
@@ -43,46 +44,17 @@
   color: rgb(0, 0, 0);
 }
 
-/* h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-} */
-/* .question-box {
-  display: flex;
-  align-items: flex-end;
-  width: 100vw;
-} */
-
 .form-group1 {
   margin-bottom: 15px;
-  /* width: 48vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 35vw;
 }
+
 select {
-  width: 47vw; /* Adjust the width as needed */
+  width: 100%; /* Adjusted for better responsiveness */
 }
-
-/* .form-group1 label {
-  text-align: center;
-  width: 50vw;
-  height: 5vh;
-} */
-
-/* form {
-  margin-bottom: 15px;
-  width: 45vw;
-  display: flex;
-  flex-direction: column;
-} */
-
-/* label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-} */
 
 select,
 button {
@@ -92,34 +64,17 @@ button {
   border: 1px solid #ccc;
 }
 
-/* button {
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-} */
-
-/* button:hover {
-  background-color: #0056b3;
-} */
-
-/* button.back-button {
-  background-color: #dc3545;
-  margin-top: 10px;
-  width: 45vh;
-} */
 .somapp-logo1 img {
   width: 20vw;
   margin-top: -160px;
   margin-bottom: 20px;
 }
+
 .question-list {
   height: 50vh;
 }
+
 .top-part {
-  /* display: flex;
-  flex-direction: column; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,6 +85,7 @@ button {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   margin-top: -25px;
 }
+
 .question-item {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -137,16 +93,21 @@ button {
   box-sizing: border-box;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
   height: auto;
-  width: 18vw;
+  width: 100%; /* Adjusted for better responsiveness */
+  max-width: 250px; /* Adjusted for better responsiveness */
+  margin: 0 auto;
 }
+
 .question-item:hover {
   background-color: #f0f0f0; /* Brighter background color on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: grabbing; /* Slight shadow on hover */
 }
+
 .option-container {
   margin-bottom: 8px;
 }
+
 .back-button-view {
   display: inline-block;
   padding: 10px 10px;
@@ -157,7 +118,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 46vw;
+  width: 100%;
 }
 
 .back-button-view:hover {
@@ -170,8 +131,10 @@ button {
   height: 16px;
   margin-right: 8px;
 }
+
 .form-container {
-  width: 50vw;
+  width: 500px;
+  max-width: 600px; /* Adjusted for better responsiveness */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -179,19 +142,17 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -100px;
 }
+
 .form-container h1 {
   color: black;
 }
+
 .question-item strong {
   display: block;
   margin-bottom: 10px;
   color: #444;
-}
-.question-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
 }
 
 .actions {
@@ -199,19 +160,16 @@ button {
 }
 
 .admin-button {
-  width: 47vw;
+  width: 100%;
 }
-/* .view-questions-form {
-  display: flex;
-  align-items: center;
-  height: 50vh;
-} */
+
 .view-questions-page {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
 }
+
 .actions .admin-button,
 .actions .back-button {
   display: inline-block;
@@ -222,27 +180,28 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 7vw;
+  width: 100%;
+  max-width: 120px; /* Adjusted for better responsiveness */
 }
 
 .actions .admin-button:hover {
   background-color: #2cb410;
 }
+
 .back-buttons {
   width: 20vw;
   background-color: #c82333;
   cursor: pointer;
 }
+
 .back-buttons:hover {
   background-color: #da4f5d;
 }
+
 .back-buttons button {
   align-items: center;
 }
-/* .top-part .back-buttons {
-  display: flex;
-  align-items: center;
-} */
+
 .actions .back-button:hover {
   background-color: #c82333;
 }
@@ -258,9 +217,13 @@ button {
   margin-bottom: 10px;
 }
 
-.edit-question-form .option-container input[type="text"] {
-  margin-right: 10px;
-  flex: 1;
+.edit-question-form input[type="text"] {
+  width: 100%;
+  max-width: 200px; /* Adjusted for better responsiveness */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .edit-question-form .actions {
@@ -284,6 +247,8 @@ input[type="radio"] {
 
   .question-item {
     padding: 10px;
+    width: 100%;
+    max-width: 100%;
   }
 
   button,
