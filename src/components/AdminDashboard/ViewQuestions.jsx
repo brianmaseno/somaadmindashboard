@@ -96,13 +96,20 @@ const ViewQuestions = () => {
   };
 
   const handleDelete = async (questionId) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/questions/${questionId}`
-      );
-      setQuestions(questions.filter((question) => question.id !== questionId));
-    } catch (error) {
-      console.error("Error deleting question:", error);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this question?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_BASE_URL}/questions/${questionId}`
+        );
+        setQuestions(
+          questions.filter((question) => question.id !== questionId)
+        );
+      } catch (error) {
+        console.error("Error deleting question:", error);
+      }
     }
   };
 
@@ -189,12 +196,7 @@ const ViewQuestions = () => {
           ) : (
             <div className="question-list">
               <div className="somapp-logo1">
-                <img
-                  src={logo}
-                  alt="Project Logo"
-                  className="logo"
-                  // style={{ transform: "scale(1.8)" }}
-                />
+                <img src={logo} alt="Project Logo" className="logo" />
               </div>
               <div className="top-part">
                 <button className="back-buttons" onClick={handleBack}>
@@ -232,7 +234,7 @@ const ViewQuestions = () => {
                               <div key={idx} className="option-container">
                                 <input
                                   type="radio"
-                                  checked={question.correct_answer === option}
+                                  checked={question.correct_answer === idx}
                                   readOnly
                                 />
                                 {option}

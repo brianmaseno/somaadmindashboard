@@ -81,7 +81,7 @@ button {
   align-items: center;
   margin: 15px;
   width: 70vw;
-  border: 1px solid #ddd;
+  border: 5px solid #ddd;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   margin-top: -25px;
 }
@@ -175,7 +175,7 @@ button {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .actions .admin-button,

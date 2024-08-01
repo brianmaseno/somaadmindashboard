@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/UploadQuestion.css";
-
 import axios from "axios";
 
 const UploadQuestion = () => {
@@ -11,9 +10,9 @@ const UploadQuestion = () => {
   const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -28,22 +27,21 @@ const UploadQuestion = () => {
 
   const handleUploadSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state to true
+    setIsLoading(true);
 
-    // Validation
     if (!question.trim()) {
       alert("Please enter the question text.");
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
       return;
     }
     if (options.some((option) => !option.trim())) {
       alert("Please fill out all options.");
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
       return;
     }
-    if (!correctAnswer.trim()) {
+    if (correctAnswer === null) {
       alert("Please select the correct answer.");
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
       return;
     }
 
@@ -70,21 +68,20 @@ const UploadQuestion = () => {
       );
       console.log(response);
       alert("Question uploaded successfully!");
-      // Clear the form but remain on step 2
       setQuestion("");
       setOptions(["", "", "", ""]);
-      setCorrectAnswer("");
+      setCorrectAnswer(null);
       setImageUrl(null);
     } catch (error) {
       console.error(error);
       alert("Failed to upload question. Please try again.");
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
-  const handleRadioChange = (value) => {
-    setCorrectAnswer(value);
+  const handleRadioChange = (index) => {
+    setCorrectAnswer(index);
   };
 
   return (
@@ -167,15 +164,6 @@ const UploadQuestion = () => {
                 required
               />
             </div>
-            {/* <div className="form-group">
-              <label htmlFor="image_url">Image (optional):</label>
-              <input
-                type="file"
-                id="image_url"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-            </div> */}
             <div className="form-group">
               <label>Options:</label>
               {options.map((option, index) => (
@@ -185,8 +173,8 @@ const UploadQuestion = () => {
                       type="radio"
                       name="correct_answer"
                       id={`option-${index}`}
-                      checked={correctAnswer === option}
-                      onChange={() => handleRadioChange(option)}
+                      checked={correctAnswer === index}
+                      onChange={() => handleRadioChange(index)}
                       required
                     />
                   </div>
@@ -204,7 +192,6 @@ const UploadQuestion = () => {
                 </div>
               ))}
             </div>
-
             <div className="upload-button">
               <button type="submit" disabled={isLoading}>
                 {isLoading ? "Loading..." : "Upload Question"}
