@@ -20,6 +20,10 @@ const UploadQuestion = () => {
     setOptions(newOptions);
   };
 
+  const handleRadioChange = (index) => {
+    setCorrectAnswer(index);
+  };
+
   const handleSelectionSubmit = (e) => {
     e.preventDefault();
     setStep(2);
@@ -78,10 +82,6 @@ const UploadQuestion = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleRadioChange = (index) => {
-    setCorrectAnswer(index);
   };
 
   return (
