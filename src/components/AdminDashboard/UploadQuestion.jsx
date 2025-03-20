@@ -122,13 +122,26 @@ const UploadQuestion = () => {
                 required
               >
                 <option value="">Select Subject</option>
-                <option value="Mathematics">Mathematics</option>
-                <option value="Science">Science</option>
-                <option value="English">English</option>
-                <option value="History">History</option>
-                <option value="Geography">Geography</option>
-                <option value="Computer Science">Computer Science</option>
+                <option value="English Activities">English Activities</option>
+                <option value="Shughuli Za  Kiswahili">Shughuli Za  Kiswahili</option>
+                <option value="Environmental Activities">Environmental Activities</option>
+                <option value="Hygiene and Nutrition">Hygiene and Nutrition</option>
+                <option value="CRE">CRE</option>
+                <option value="Islamic Religious Education">Islamic Religious Education</option>
+                <option value="Music">Music</option>
+              <option value="Movement">Movement</option>
+              <option value="Art And Craft">Art And Craft</option>
+              <option value="English">English</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Kiswahili">Kiswahili</option>
+              <option value="Science And Technology">Science And Technology</option>
+              <option value="Home Science">Home Science</option>
+              <option value="Social Studies">Social Studies</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="PHE">PHE</option>
+              <option value="Music">Music</option>
               </select>
+              
             </div>
             <div className="form-groups2">
               <label htmlFor="topic">Topic:</label>
