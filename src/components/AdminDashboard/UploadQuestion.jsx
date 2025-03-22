@@ -10,6 +10,7 @@ const UploadQuestion = () => {
   const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +19,16 @@ const UploadQuestion = () => {
     const newOptions = [...options];
     newOptions[index] = value;
     setOptions(newOptions);
+    
+    // Update correct answer if this option is currently selected
+    if (selectedOptionIndex === index) {
+      setCorrectAnswer(value);
+    }
   };
 
   const handleRadioChange = (index) => {
-    setCorrectAnswer(index);
+    setSelectedOptionIndex(index);
+    setCorrectAnswer(options[index]);
   };
 
   const handleSelectionSubmit = (e) => {
@@ -55,7 +62,7 @@ const UploadQuestion = () => {
     formData.append("topic", topic);
     formData.append("question", question);
     formData.append("options", JSON.stringify(options));
-    formData.append("correct_answer", correctAnswer);
+    formData.append("correct_answer", correctAnswer); // This is now the actual text value
     if (imageUrl) {
       formData.append("image_url", imageUrl);
     }
@@ -74,6 +81,7 @@ const UploadQuestion = () => {
       alert("Question uploaded successfully!");
       setQuestion("");
       setOptions(["", "", "", ""]);
+      setSelectedOptionIndex(null);
       setCorrectAnswer(null);
       setImageUrl(null);
     } catch (error) {
@@ -129,19 +137,18 @@ const UploadQuestion = () => {
                 <option value="CRE">CRE</option>
                 <option value="Islamic Religious Education">Islamic Religious Education</option>
                 <option value="Music">Music</option>
-              <option value="Movement">Movement</option>
-              <option value="Art And Craft">Art And Craft</option>
-              <option value="English">English</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Kiswahili">Kiswahili</option>
-              <option value="Science And Technology">Science And Technology</option>
-              <option value="Home Science">Home Science</option>
-              <option value="Social Studies">Social Studies</option>
-              <option value="Agriculture">Agriculture</option>
-              <option value="PHE">PHE</option>
-              <option value="Music">Music</option>
+                <option value="Movement">Movement</option>
+                <option value="Art And Craft">Art And Craft</option>
+                <option value="English">English</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Kiswahili">Kiswahili</option>
+                <option value="Science And Technology">Science And Technology</option>
+                <option value="Home Science">Home Science</option>
+                <option value="Social Studies">Social Studies</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="PHE">PHE</option>
+                <option value="Music">Music</option>
               </select>
-              
             </div>
             <div className="form-groups2">
               <label htmlFor="topic">Topic:</label>
@@ -186,7 +193,7 @@ const UploadQuestion = () => {
                       type="radio"
                       name="correct_answer"
                       id={`option-${index}`}
-                      checked={correctAnswer === index}
+                      checked={selectedOptionIndex === index}
                       onChange={() => handleRadioChange(index)}
                       required
                     />
