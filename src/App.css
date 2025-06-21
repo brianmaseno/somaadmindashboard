@@ -6,43 +6,85 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 40px;
+}
+
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.dashboard-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .button-container {
-  margin: 20px auto; /* Center the button container horizontally */
-  width: 40vw;
+  margin: 30px auto;
+  width: 90vw;
+  max-width: 900px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center; /* Center the buttons horizontally */
-}
-.admin-header {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-.admin-header h1 {
-  color: black;
   justify-content: center;
+  gap: 25px;
 }
+
+.admin-header {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.admin-header h1 {
+  color: #303030;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 10px 0;
+}
+
 .admin-button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 15px 30px;
   margin: 10px;
   text-decoration: none;
   color: #fff;
   background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.25);
+  min-width: 220px;
+  text-align: center;
 }
+
 .logo {
-  margin-top: 0px;
-  width: 15vw;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  width: 20vw;
+  max-width: 200px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
+
+.logo:hover {
+  transform: scale(1.05) !important;
+}
+
 .admin-button:hover {
-  background-color: #aefd89;
+  background-color: #0056b3;
+  box-shadow: 0 6px 14px rgba(0, 86, 179, 0.3);
+  transform: translateY(-3px);
   color: white;
 }
 

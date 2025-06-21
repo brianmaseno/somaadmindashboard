@@ -1,0 +1,361 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "../../css/AllQuestions.css";
+import logo from "../../assets/soma1.png";
+
+const AllQuestions = () => {
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const questionsPerPage = 10;
+
+  useEffect(() => {
+    fetchAllQuestions();
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setSearchResults(questions);
+    } else {
+      const results = questions.filter(question => 
+        question.question?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    }
+  }, [searchTerm, questions]);
+
+  const fetchAllQuestions = async () => {
+    setLoading(true);
+    setError(null); // Clear any previous errors
+    try {
+      // Use the admin-test endpoint that doesn't require auth
+      const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
+      console.log("Using API URL:", BASE_URL);
+      
+      // Show a helpful console message about the backend connection
+      console.log("Connecting to backend server...");
+      console.log("If questions are not loading, please check:");
+      console.log("1. Is the backend server running at " + BASE_URL + "?");
+      console.log("2. Is the /admin-test/questions endpoint configured correctly?");
+      
+      const response = await axios.get(
+        `${BASE_URL}/admin-test/questions`,
+        { 
+          params: { 
+            page: currentPage,
+            limit: questionsPerPage
+          }
+        }
+      );
+      
+      console.log("Questions API response:", response.data);
+      
+      if (response.data && response.data.success) {
+        const questionsData = response.data.data.questions;
+        
+        // Format the questions to match what the component expects
+        const formattedQuestions = questionsData.map(q => {
+          // Get the options as an array
+          const options = Array.isArray(q.options) ? q.options : [];
+          
+          // Find the index of the correct answer in the options array
+          // This converts from the string correct_answer to the index for the UI
+          const correctAnswerIndex = options.findIndex(opt => opt === q.correct_answer);
+          
+          return {
+            id: q._id,
+            question: q.question || '',
+            options: options,
+            // If correct answer not found, default to 0
+            correct_answer: correctAnswerIndex >= 0 ? correctAnswerIndex : 0,
+            grade: q.topic_id?.subject_id?.grade,
+            subject: q.topic_id?.subject_id?.subject_name,
+            topic: q.topic_id?.topic_name,
+            // Store original correct answer value for debugging
+            original_correct_answer: q.correct_answer
+          };
+        });
+        
+        console.log("Formatted questions:", formattedQuestions);
+        
+        setQuestions(formattedQuestions);
+        // Set total pages based on the response
+        setTotalPages(Math.ceil(response.data.data.total / questionsPerPage));
+      } else {
+        setError("No questions found or API error");
+      }
+    } catch (err) {
+      console.error("Error fetching questions:", err);
+      setError("Error loading questions. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (questionId) => {
+    setEditMode(questionId);
+  };
+
+  const handleDelete = async (questionId) => {
+    if (window.confirm("Are you sure you want to delete this question?")) {
+      try {
+        setLoading(true);
+        const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
+        const response = await axios.delete(`${BASE_URL}/admin-test/questions/${questionId}`);
+        
+        if (response.data.success) {
+          // Remove the deleted question from the state
+          setQuestions(questions.filter(q => q.id !== questionId));
+          alert("Question deleted successfully!");
+        } else {
+          alert("Failed to delete question: " + (response.data.error || "Unknown error"));
+        }
+      } catch (err) {
+        console.error("Error deleting question:", err);
+        alert("Error deleting question. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleSaveEdit = async (updatedQuestion) => {
+    try {
+      setLoading(true);
+      const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
+      
+      console.log("Saving question:", updatedQuestion);
+      
+      // Get the correct answer as the string value from options using the index
+      const correctAnswer = updatedQuestion.options[updatedQuestion.correct_answer];
+      
+      if (!correctAnswer) {
+        alert("Error: Correct answer selection is invalid. Please select a valid option.");
+        setLoading(false);
+        return;
+      }
+      
+      // Format the question to match what the admin-test endpoint expects
+      const questionToUpdate = {
+        question: updatedQuestion.question,
+        options: updatedQuestion.options,
+        // Use the string value of the correct answer, not the index
+        correct_answer: correctAnswer,
+        explanation: updatedQuestion.explanation || ''
+      };
+      
+      console.log("Updating question at:", `${BASE_URL}/admin-test/questions/${updatedQuestion.id}`);
+      console.log("With data:", questionToUpdate);
+      
+      const response = await axios.put(
+        `${BASE_URL}/admin-test/questions/${updatedQuestion.id}`,
+        questionToUpdate
+      );
+      
+      if (response.data.success) {
+        // Update the questions in state with the edited one
+        setQuestions(questions.map(q => 
+          q.id === updatedQuestion.id ? updatedQuestion : q
+        ));
+        setEditMode(null); // Exit edit mode
+        alert("Question updated successfully!");
+      } else {
+        alert("Failed to update question: " + (response.data.error || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("Error updating question:", err);
+      alert("Error updating question. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(null);
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <div className="all-questions-container">
+      <div className="header">
+        <div className="somapp-logo">
+          <img src={logo} alt="SomaApp Logo" className="logo" />
+        </div>
+        <h1>All Questions</h1>
+        <Link to="/" className="back-button">Back to Dashboard</Link>
+      </div>
+
+      <div className="search-section">
+        <input
+          type="text"
+          placeholder="Search questions..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="search-input"
+        />
+      </div>
+
+      {loading && <div className="loading">Loading questions...</div>}
+      
+      {error && <div className="error-message">{error}</div>}
+
+      {!loading && !error && searchResults.length === 0 && (
+        <div className="no-questions">No questions found. Try a different search term or add new questions.</div>
+      )}
+
+      <div className="questions-list">
+        {searchResults.map((question) => (
+          <div key={question.id} className="question-card">
+            {editMode === question.id ? (
+              <EditQuestionForm
+                question={question}
+                onSave={handleSaveEdit}
+                onCancel={handleCancelEdit}
+              />
+            ) : (
+              <>
+                <div className="question-details">
+                  <h3 className="question-text">{question.question}</h3>
+                  
+                  <div className="meta-info">
+                    <span>Grade: {question.grade}</span>
+                    <span>Subject: {question.subject}</span>
+                    <span>Topic: {question.topic}</span>
+                  </div>
+                  
+                  <div className="options-list">
+                    <h4>Options:</h4>
+                    <ul>
+                      {question.options && question.options.map((option, idx) => (
+                        <li 
+                          key={idx} 
+                          className={idx === question.correct_answer ? "correct-option" : ""}
+                        >
+                          {String.fromCharCode(65 + idx)}. {option}
+                          {idx === question.correct_answer && <span className="correct-badge">✓</span>}
+                        </li>
+                      ))}
+                      {(!question.options || question.options.length === 0) && (
+                        <li>No options available</li>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="question-actions">
+                  <button className="edit-btn" onClick={() => handleEdit(question.id)}>Edit</button>
+                  <button className="delete-btn" onClick={() => handleDelete(question.id)}>Delete</button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="page-btn"
+            disabled={currentPage === 1} 
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </button>
+          <span className="page-indicator">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button 
+            className="page-btn"
+            disabled={currentPage === totalPages} 
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const EditQuestionForm = ({ question, onSave, onCancel }) => {
+  const [updatedQuestion, setUpdatedQuestion] = useState({ ...question });
+
+  const handleOptionChange = (index, value) => {
+    const newOptions = [...updatedQuestion.options];
+    newOptions[index] = value;
+    setUpdatedQuestion({ ...updatedQuestion, options: newOptions });
+  };
+
+  const handleCorrectAnswerChange = (index) => {
+    setUpdatedQuestion({ ...updatedQuestion, correct_answer: index });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(updatedQuestion);
+  };
+
+  return (
+    <div className="edit-question-form">
+      <h3>Edit Question</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="question-text">Question Text:</label>
+          <textarea
+            id="question-text"
+            value={updatedQuestion.question}
+            onChange={(e) => setUpdatedQuestion({ ...updatedQuestion, question: e.target.value })}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Options:</label>
+          {updatedQuestion.options.map((option, index) => (
+            <div key={index} className="option-edit">
+              <span className="option-letter">{String.fromCharCode(65 + index)}</span>
+              <input
+                type="text"
+                value={option}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+                required
+              />
+              <label>
+                <input
+                  type="radio"
+                  name="correct-answer"
+                  checked={updatedQuestion.correct_answer === index}
+                  onChange={() => handleCorrectAnswerChange(index)}
+                  required
+                />
+                Correct
+              </label>
+            </div>
+          ))}
+        </div>
+
+        <div className="form-actions">
+          <button type="submit" className="save-btn">Save Changes</button>
+          <button type="button" className="cancel-btn" onClick={onCancel}>Cancel</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AllQuestions;
